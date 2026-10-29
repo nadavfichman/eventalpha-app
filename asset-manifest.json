@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/eventalpha-app/static/css/main.bcde94aa.css",
-    "main.js": "/eventalpha-app/static/js/main.d3445616.js",
+    "main.js": "/eventalpha-app/static/js/main.a902fe4e.js",
     "static/js/453.825386d9.chunk.js": "/eventalpha-app/static/js/453.825386d9.chunk.js",
     "index.html": "/eventalpha-app/index.html",
     "main.bcde94aa.css.map": "/eventalpha-app/static/css/main.bcde94aa.css.map",
-    "main.d3445616.js.map": "/eventalpha-app/static/js/main.d3445616.js.map",
+    "main.a902fe4e.js.map": "/eventalpha-app/static/js/main.a902fe4e.js.map",
     "453.825386d9.chunk.js.map": "/eventalpha-app/static/js/453.825386d9.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.bcde94aa.css",
-    "static/js/main.d3445616.js"
+    "static/js/main.a902fe4e.js"
   ]
 }
