@@ -1,0 +1,35 @@
+name: Verify live Pages content matches this push
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check this repo's Pages config
+        run: |
+          curl -sS -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+               -H "Accept: application/vnd.github+json" \
+               "https://api.github.com/repos/${{ github.repository }}/pages"
+
+      - name: Verify the live site is actually serving this build
+        run: |
+          expected=$(basename static/js/main.*.js)
+          echo "Expecting live bundle: static/js/$expected"
+          for i in $(seq 1 30); do
+            live=$(curl -sS --max-time 15 "https://nadavfichman.github.io/eventalpha-app/" \
+                     | grep -o 'static/js/main\.[a-zA-Z0-9]*\.js' | head -1)
+            echo "Attempt $i/30: live bundle is ${live:-<none>}"
+            if [ "$live" = "static/js/$expected" ]; then
+              echo "Verified: live site matches this push."
+              exit 0
+            fi
+            sleep 20
+          done
+          echo "::error::Live site still not serving this push after 10 minutes."
+          exit 1
